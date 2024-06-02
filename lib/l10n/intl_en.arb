@@ -1,0 +1,17 @@
+{
+  "requests": "Requests",
+  "search": "Search",
+  "type": "Type:",
+  "purpose": "Purpose:",
+  "date": "Date:",
+  "effect": "Effect:",
+  "entry": "Entry",
+  "phone_number": "Phone number",
+  "minimal_number": "Minimum 8 numbers",
+  "password": "Password",
+  "forgot_password": "Forgot your password?",
+  "enter_password": "Enter password",
+  "have_not_registered": "You haven't registered yet?",
+  "register": "Register",
+  "minimum_character": "Minimum 8 characters"
+}

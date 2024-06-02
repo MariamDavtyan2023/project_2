@@ -1,0 +1,17 @@
+{
+  "requests": "Հարցումներ",
+  "search": "Որոնել",
+  "type": "Տեսակ՝",
+  "purpose": "Նպատակ՝",
+  "date": "Ամսաթիվ՝",
+  "effect": "Ազդեցություն՝",
+  "entry": "Մուտք",
+  "phone_number": "Հեռախոսահամար",
+  "minimal_number": "Նվազագույնը 8 թիվ",
+  "password": "Գաղտնաբառ",
+  "forgot_password": "Մոռացե՞լ եք գաղտնաբառը",
+  "enter_password": "Լրացնել գաղտնաբառը",
+  "have_not_registered": "Դուք դեռ չե՞ք գրանցվել։",
+  "register": "Գրանցվել",
+  "minimum_character": "Նվազագույնը 8 նիշ"
+}
