@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:project_2/generated/l10n.dart';
 import 'package:project_2/login/screen/login_screen.dart';
@@ -5,6 +7,7 @@ import 'package:project_2/requests/models/request.dart';
 import 'package:project_2/res/colors.dart';
 import 'package:project_2/widgets/list_view_request.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 
 
@@ -42,128 +45,147 @@ class SearchRequestState extends State<SearchRequest> {
 
   String name = '';
 
-   List<Request> requests = [
-    Request(
-        bankImage: 'assets/images/evokabank.png',
-        bankName: 'Էվոկա բանկ',
-        type: 'ՖԱՅԿՈ Սքոր զեկույց',
-        purpose: 'Նոր վարկի դիմում',
-        date: DateTime.now(),
-        effect: 'Ազդում է',
-        effectIcon: 'assets/icons/low_price.png'),
-    Request(
-        bankImage: 'assets/images/id_bank.png',
-        bankName: 'Այ Դի բանկ',
-        type: 'ՖԱՅԿՈ Սքոր զեկույց',
-        purpose: 'Նոր վարկի դիմում',
-        date: DateTime.now(),
-        effect: 'Չի ազդում',
-        effectIcon: 'assets/icons/hand.png'),
-    Request(
-        bankImage: 'assets/images/default_logo.png',
-        bankName: 'Բանկային կազմակերպություն',
-        type: 'ՖԱՅԿՈ Սքոր զեկույց',
-        purpose: 'Նոր վարկի դիմում',
-        date: DateTime.now(),
-        effect: 'Ազդում է',
-        effectIcon: 'assets/icons/low_price.png'),
-    Request(
-        bankImage: 'assets/images/evokabank.png',
-        bankName: 'Էվոկա բանկ',
-        type: 'ՖԱՅԿՈ Սքոր զեկույց',
-        purpose: 'Նոր վարկի դիմում',
-        date: DateTime.now(),
-        effect: 'Ազդում է',
-        effectIcon: 'assets/icons/low_price.png'),
-    Request(
-        bankImage: 'assets/images/id_bank.png',
-        bankName: 'Այ Դի բանկ',
-        type: 'ՖԱՅԿՈ Սքոր զեկույց',
-        purpose: 'Նոր վարկի դիմում',
-        date: DateTime.now(),
-        effect: 'Չի ազդում',
-        effectIcon: 'assets/icons/hand.png'),
-    Request(
-        bankImage: 'assets/images/default_logo.png',
-        bankName: 'Բանկային կազմակերպություն',
-        type: 'ՖԱՅԿՈ Սքոր զեկույց',
-        purpose: 'Նոր վարկի դիմում',
-        date: DateTime.now(),
-        effect: 'Ազդում է',
-        effectIcon: 'assets/icons/low_price.png'),
-    Request(
-        bankImage: 'assets/images/evokabank.png',
-        bankName: 'Էվոկա բանկ',
-        type: 'ՖԱՅԿՈ Սքոր զեկույց',
-        purpose: 'Նոր վարկի դիմում',
-        date: DateTime.now(),
-        effect: 'Ազդում է',
-        effectIcon: 'assets/icons/low_price.png'),
-    Request(
-        bankImage: 'assets/images/id_bank.png',
-        bankName: 'Այ Դի բանկ',
-        type: 'ՖԱՅԿՈ Սքոր զեկույց',
-        purpose: 'Նոր վարկի դիմում',
-        date: DateTime.now(),
-        effect: 'Չի ազդում',
-        effectIcon: 'assets/icons/hand.png'),
-    Request(
-        bankImage: 'assets/images/default_logo.png',
-        bankName: 'Բանկային կազմակերպություն',
-        type: 'ՖԱՅԿՈ Սքոր զեկույց',
-        purpose: 'Նոր վարկի դիմում',
-        date: DateTime.now(),
-        effect: 'Ազդում է',
-        effectIcon: 'assets/icons/low_price.png'),
-    Request(
-        bankImage: 'assets/images/evokabank.png',
-        bankName: 'Էվոկա բանկ',
-        type: 'ՖԱՅԿՈ Սքոր զեկույց',
-        purpose: 'Նոր վարկի դիմում',
-        date: DateTime.now(),
-        effect: 'Ազդում է',
-        effectIcon: 'assets/icons/low_price.png'),
-    Request(
-        bankImage: 'assets/images/id_bank.png',
-        bankName: 'Այ Դի բանկ',
-        type: 'ՖԱՅԿՈ Սքոր զեկույց',
-        purpose: 'Նոր վարկի դիմում',
-        date: DateTime.now(),
-        effect: 'Չի ազդում',
-        effectIcon: 'assets/icons/hand.png'),
-    Request(
-        bankImage: 'assets/images/default_logo.png',
-        bankName: 'Բանկային կազմակերպություն',
-        type: 'ՖԱՅԿՈ Սքոր զեկույց',
-        purpose: 'Նոր վարկի դիմում',
-        date: DateTime.now(),
-        effect: 'Ազդում է',
-        effectIcon: 'assets/icons/low_price.png'),
-    Request(
-        bankImage: 'assets/images/evokabank.png',
-        bankName: 'Էվոկա բանկ',
-        type: 'ՖԱՅԿՈ Սքոր զեկույց',
-        purpose: 'Նոր վարկի դիմում',
-        date: DateTime.now(),
-        effect: 'Ազդում է',
-        effectIcon: 'assets/icons/low_price.png'),
-    Request(
-        bankImage: 'assets/images/id_bank.png',
-        bankName: 'Այ Դի բանկ',
-        type: 'ՖԱՅԿՈ Սքոր զեկույց',
-        purpose: 'Նոր վարկի դիմում',
-        date: DateTime.now(),
-        effect: 'Չի ազդում',
-        effectIcon: 'assets/icons/hand.png'),
-    Request(
-        bankImage: 'assets/images/default_logo.png',
-        bankName: 'Բանկային կազմակերպություն',
-        type: 'ՖԱՅԿՈ Սքոր զեկույց',
-        purpose: 'Նոր վարկի դիմում',
-        date: DateTime.now(),
-        effect: 'Ազդում է',
-        effectIcon: 'assets/icons/low_price.png'),
-  ];
+  //  List<Request> requests = [
+  //   Request(
+  //       bankImage: 'assets/images/evokabank.png',
+  //       bankName: 'Էվոկա բանկ',
+  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
+  //       purpose: 'Նոր վարկի դիմում',
+  //       date: DateTime.now(),
+  //       effect: 'Ազդում է',
+  //       effectIcon: 'assets/icons/low_price.png'),
+  //   Request(
+  //       bankImage: 'assets/images/id_bank.png',
+  //       bankName: 'Այ Դի բանկ',
+  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
+  //       purpose: 'Նոր վարկի դիմում',
+  //       date: DateTime.now(),
+  //       effect: 'Չի ազդում',
+  //       effectIcon: 'assets/icons/hand.png'),
+  //   Request(
+  //       bankImage: 'assets/images/default_logo.png',
+  //       bankName: 'Բանկային կազմակերպություն',
+  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
+  //       purpose: 'Նոր վարկի դիմում',
+  //       date: DateTime.now(),
+  //       effect: 'Ազդում է',
+  //       effectIcon: 'assets/icons/low_price.png'),
+  //   Request(
+  //       bankImage: 'assets/images/evokabank.png',
+  //       bankName: 'Էվոկա բանկ',
+  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
+  //       purpose: 'Նոր վարկի դիմում',
+  //       date: DateTime.now(),
+  //       effect: 'Ազդում է',
+  //       effectIcon: 'assets/icons/low_price.png'),
+  //   Request(
+  //       bankImage: 'assets/images/id_bank.png',
+  //       bankName: 'Այ Դի բանկ',
+  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
+  //       purpose: 'Նոր վարկի դիմում',
+  //       date: DateTime.now(),
+  //       effect: 'Չի ազդում',
+  //       effectIcon: 'assets/icons/hand.png'),
+  //   Request(
+  //       bankImage: 'assets/images/default_logo.png',
+  //       bankName: 'Բանկային կազմակերպություն',
+  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
+  //       purpose: 'Նոր վարկի դիմում',
+  //       date: DateTime.now(),
+  //       effect: 'Ազդում է',
+  //       effectIcon: 'assets/icons/low_price.png'),
+  //   Request(
+  //       bankImage: 'assets/images/evokabank.png',
+  //       bankName: 'Էվոկա բանկ',
+  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
+  //       purpose: 'Նոր վարկի դիմում',
+  //       date: DateTime.now(),
+  //       effect: 'Ազդում է',
+  //       effectIcon: 'assets/icons/low_price.png'),
+  //   Request(
+  //       bankImage: 'assets/images/id_bank.png',
+  //       bankName: 'Այ Դի բանկ',
+  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
+  //       purpose: 'Նոր վարկի դիմում',
+  //       date: DateTime.now(),
+  //       effect: 'Չի ազդում',
+  //       effectIcon: 'assets/icons/hand.png'),
+  //   Request(
+  //       bankImage: 'assets/images/default_logo.png',
+  //       bankName: 'Բանկային կազմակերպություն',
+  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
+  //       purpose: 'Նոր վարկի դիմում',
+  //       date: DateTime.now(),
+  //       effect: 'Ազդում է',
+  //       effectIcon: 'assets/icons/low_price.png'),
+  //   Request(
+  //       bankImage: 'assets/images/evokabank.png',
+  //       bankName: 'Էվոկա բանկ',
+  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
+  //       purpose: 'Նոր վարկի դիմում',
+  //       date: DateTime.now(),
+  //       effect: 'Ազդում է',
+  //       effectIcon: 'assets/icons/low_price.png'),
+  //   Request(
+  //       bankImage: 'assets/images/id_bank.png',
+  //       bankName: 'Այ Դի բանկ',
+  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
+  //       purpose: 'Նոր վարկի դիմում',
+  //       date: DateTime.now(),
+  //       effect: 'Չի ազդում',
+  //       effectIcon: 'assets/icons/hand.png'),
+  //   Request(
+  //       bankImage: 'assets/images/default_logo.png',
+  //       bankName: 'Բանկային կազմակերպություն',
+  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
+  //       purpose: 'Նոր վարկի դիմում',
+  //       date: DateTime.now(),
+  //       effect: 'Ազդում է',
+  //       effectIcon: 'assets/icons/low_price.png'),
+  //   Request(
+  //       bankImage: 'assets/images/evokabank.png',
+  //       bankName: 'Էվոկա բանկ',
+  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
+  //       purpose: 'Նոր վարկի դիմում',
+  //       date: DateTime.now(),
+  //       effect: 'Ազդում է',
+  //       effectIcon: 'assets/icons/low_price.png'),
+  //   Request(
+  //       bankImage: 'assets/images/id_bank.png',
+  //       bankName: 'Այ Դի բանկ',
+  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
+  //       purpose: 'Նոր վարկի դիմում',
+  //       date: DateTime.now(),
+  //       effect: 'Չի ազդում',
+  //       effectIcon: 'assets/icons/hand.png'),
+  //   Request(
+  //       bankImage: 'assets/images/default_logo.png',
+  //       bankName: 'Բանկային կազմակերպություն',
+  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
+  //       purpose: 'Նոր վարկի դիմում',
+  //       date: DateTime.now(),
+  //       effect: 'Ազդում է',
+  //       effectIcon: 'assets/icons/low_price.png'),
+  // ];
+
+
+  List<Request> requests=[];
+
+  Future<List<Request>> loadRequests({ String locale="armenian"}) async {
+    final String response = await rootBundle.loadString('assets/local/${locale == "am" ? 'armenian.json' : 'english.json'}');
+    final List<dynamic> data = jsonDecode(response);
+    return data.map((json) => Request.fromJson(json)).toList();
+  }
+  @override
+  void initState() {
+    initValues(locale: "am");
+    super.initState();
+  }
+
+  Future<void> initValues({String locale = "am"}) async{
+    requests =await loadRequests(locale: locale);
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,29 +1,35 @@
+import 'dart:convert';
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:project_2/requests/models/request.dart';
 import 'package:project_2/res/colors.dart';
 import '../../generated/l10n.dart';
 import '../../requests/screens/request_list.dart';
-
+import 'package:provider/provider.dart';
 
 String language = 'hy';
 
-
 class Login extends StatelessWidget {
   const Login({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return  MaterialApp(
+      locale: Locale(language),
       localizationsDelegates: const <LocalizationsDelegate>[
         S.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate
       ],
-      supportedLocales: [Locale(language)].reversed,
+      supportedLocales: [Locale(language)],
       routes: {
         '/request_list': (context) => const Requests(),
       },
       home: const NumberAndPassword(),
+
     );
   }
 }
@@ -44,31 +50,46 @@ class NumberAndPasswordState extends State<NumberAndPassword> {
   bool _validPassword = true;
   String phone = '';
   String password = '';
-  String dropdownValue = 'Arm';
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  void changeLanguage(String local) {
+
+  }
 
   @override
   Widget build(BuildContext context) {
+   // LanguageProvider state = Provider.of<LanguageProvider>(context);
     return Scaffold(
       appBar: AppBar(
         actions: [
           DropdownButton<String>(
-            value: dropdownValue,
-            icon: const Icon(Icons.language, color: AppColors.appBarText,),
+            value: language,
+            icon: const Icon(
+              Icons.language,
+              color: AppColors.appBarText,
+            ),
             style: const TextStyle(color: AppColors.appBarText),
-            onChanged: (String? newValue) {
-              setState(() {
-                dropdownValue = newValue!;
-                if(dropdownValue == 'Eng') {
-                  language = 'en';
-                } else {
-                  language = 'hy';
-                }
-              });
-            },
+
             items: const [
-              DropdownMenuItem(value: 'Eng', child: Text('Eng', style: TextStyle(color: Colors.black),)),
-              DropdownMenuItem(value: 'Arm', child: Text('Arm', style: TextStyle(color: Colors.black)))
+              DropdownMenuItem(
+                  value: 'en',
+                  child: Text(
+                    'en',
+                    style: TextStyle(color: Colors.black),
+                  )),
+              DropdownMenuItem(
+                  value: 'hy',
+                  child: Text('hy', style: TextStyle(color: Colors.black)))
             ],
+            onChanged: (String? newValue) async {
+             // await state.changeLanguage(newValue!);
+            },
           ),
         ],
         toolbarHeight: 88,
@@ -100,9 +121,10 @@ class NumberAndPasswordState extends State<NumberAndPassword> {
                 height: 150,
               ),
               const SizedBox(height: 20),
-               Text(
+              Text(
                 S.of(context).phone_number,
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               TextField(
                 keyboardType: TextInputType.phone,
@@ -116,6 +138,10 @@ class NumberAndPasswordState extends State<NumberAndPassword> {
                   filled: true,
                   hintText: '+374 .. ... ...',
                   hintStyle: const TextStyle(fontSize: 16, color: Colors.grey),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(
+                          style: BorderStyle.solid, color: AppColors.appBar)),
                   enabledBorder: _validPhone
                       ? OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
@@ -129,7 +155,7 @@ class NumberAndPasswordState extends State<NumberAndPassword> {
                 onChanged: (val) {
                   setState(() {
                     phone = val;
-                    if ((phone.isNotEmpty && phone.length <= 8)) {
+                    if ((phone.isNotEmpty && phone.length < 8)) {
                       _validPhone = false;
                     } else {
                       _validPhone = true;
@@ -144,11 +170,13 @@ class NumberAndPasswordState extends State<NumberAndPassword> {
                 children: [
                   Text(
                     S.of(context).password,
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   Text(
                     S.of(context).forgot_password,
-                    style: const TextStyle(fontSize: 12, color: AppColors.appBar),
+                    style:
+                        const TextStyle(fontSize: 12, color: AppColors.appBar),
                   ),
                 ],
               ),
@@ -159,7 +187,8 @@ class NumberAndPasswordState extends State<NumberAndPassword> {
                       ? AppColors.textField
                       : AppColors.errorTextField,
                   filled: true,
-                  helperText: _validPassword ? '' : S.of(context).minimum_character,
+                  helperText:
+                      _validPassword ? '' : S.of(context).minimum_character,
                   helperStyle: const TextStyle(
                       fontSize: 12, color: AppColors.errorBorderSideColor),
                   hintText: S.of(context).enter_password,
@@ -180,6 +209,10 @@ class NumberAndPasswordState extends State<NumberAndPassword> {
                       });
                     },
                   ),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(
+                          style: BorderStyle.solid, color: AppColors.appBar)),
                   enabledBorder: _validPassword
                       ? OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
@@ -191,10 +224,9 @@ class NumberAndPasswordState extends State<NumberAndPassword> {
                               color: AppColors.errorBorderSideColor)),
                 ),
                 onChanged: (val) {
-
                   setState(() {
                     password = val;
-                    if ((password.isNotEmpty && password.length <= 8)) {
+                    if ((password.isNotEmpty && password.length < 8)) {
                       _validPassword = false;
                     } else {
                       _validPassword = true;
@@ -225,7 +257,7 @@ class NumberAndPasswordState extends State<NumberAndPassword> {
                   ),
                 ),
                 child: Text(
-                    S.of(context).entry,
+                  S.of(context).entry,
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -243,7 +275,8 @@ class NumberAndPasswordState extends State<NumberAndPassword> {
                   ),
                   Text(
                     S.of(context).register,
-                    style: const TextStyle(fontSize: 14, color: AppColors.appBar),
+                    style:
+                        const TextStyle(fontSize: 14, color: AppColors.appBar),
                   )
                 ],
               )
@@ -263,3 +296,9 @@ class NumberAndPasswordState extends State<NumberAndPassword> {
     }
   }
 }
+
+// class LanguageProvider extends ChangeNotifier {
+//   void changeLanguage(String lang) {
+//     language = lang;
+//   }
+// }
