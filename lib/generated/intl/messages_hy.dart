@@ -31,6 +31,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Մոռացե՞լ եք գաղտնաբառը"),
         "have_not_registered":
             MessageLookupByLibrary.simpleMessage("Դուք դեռ չե՞ք գրանցվել։"),
+        "input_data_wrong": MessageLookupByLibrary.simpleMessage(
+            "Ձեր տվյալները մուտք են արվել թույլատրելի քանակից շատ։"),
+        "invalid_input_data":
+            MessageLookupByLibrary.simpleMessage("Սխալ մուտքային տվյալներ"),
         "minimal_number":
             MessageLookupByLibrary.simpleMessage("Նվազագույնը 8 թիվ"),
         "minimum_character":
@@ -40,7 +44,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "purpose": MessageLookupByLibrary.simpleMessage("Նպատակ՝"),
         "register": MessageLookupByLibrary.simpleMessage("Գրանցվել"),
         "requests": MessageLookupByLibrary.simpleMessage("Հարցումներ"),
+        "reset_password":
+            MessageLookupByLibrary.simpleMessage("Վերականգնել գաղտնաբառը"),
         "search": MessageLookupByLibrary.simpleMessage("Որոնել"),
-        "type": MessageLookupByLibrary.simpleMessage("Տեսակ՝")
+        "the_input_data_was_filled_in_incorrectly":
+            MessageLookupByLibrary.simpleMessage(
+                "Մուտքային տվյալները սխալ են լրացված"),
+        "try_again": MessageLookupByLibrary.simpleMessage("Փորձել կրկին"),
+        "type": MessageLookupByLibrary.simpleMessage("Տեսակ՝"),
+        "warning": MessageLookupByLibrary.simpleMessage("Ուշադրություն")
       };
 }

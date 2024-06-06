@@ -31,6 +31,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Forgot your password?"),
         "have_not_registered": MessageLookupByLibrary.simpleMessage(
             "You haven\'t registered yet?"),
+        "input_data_wrong": MessageLookupByLibrary.simpleMessage(
+            "Your data has been accessed more than the allowed amount."),
+        "invalid_input_data":
+            MessageLookupByLibrary.simpleMessage("Invalid input data"),
         "minimal_number":
             MessageLookupByLibrary.simpleMessage("Minimum 8 numbers"),
         "minimum_character":
@@ -40,7 +44,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "purpose": MessageLookupByLibrary.simpleMessage("Purpose:"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "requests": MessageLookupByLibrary.simpleMessage("Requests"),
+        "reset_password":
+            MessageLookupByLibrary.simpleMessage("Reset password"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
-        "type": MessageLookupByLibrary.simpleMessage("Type:")
+        "the_input_data_was_filled_in_incorrectly":
+            MessageLookupByLibrary.simpleMessage(
+                "The input data was filled in incorrectly"),
+        "try_again": MessageLookupByLibrary.simpleMessage("Try again"),
+        "type": MessageLookupByLibrary.simpleMessage("Type:"),
+        "warning": MessageLookupByLibrary.simpleMessage("Warning")
       };
 }

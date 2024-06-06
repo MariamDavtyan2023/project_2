@@ -199,6 +199,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Warning`
+  String get warning {
+    return Intl.message(
+      'Warning',
+      name: 'warning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your data has been accessed more than the allowed amount.`
+  String get input_data_wrong {
+    return Intl.message(
+      'Your data has been accessed more than the allowed amount.',
+      name: 'input_data_wrong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset password`
+  String get reset_password {
+    return Intl.message(
+      'Reset password',
+      name: 'reset_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid input data`
+  String get invalid_input_data {
+    return Intl.message(
+      'Invalid input data',
+      name: 'invalid_input_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The input data was filled in incorrectly`
+  String get the_input_data_was_filled_in_incorrectly {
+    return Intl.message(
+      'The input data was filled in incorrectly',
+      name: 'the_input_data_was_filled_in_incorrectly',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Try again`
+  String get try_again {
+    return Intl.message(
+      'Try again',
+      name: 'try_again',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

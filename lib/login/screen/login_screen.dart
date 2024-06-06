@@ -57,16 +57,17 @@ class NumberAndPasswordState extends State<NumberAndPassword> {
                 style: const TextStyle(color: AppColors.appBarText),
                 items: const [
                   DropdownMenuItem(
-                      value: 'en',
-                      child: Text(
-                        'en',
-                        style: TextStyle(color: Colors.black),
-                      )),
+                    value: 'en',
+                    child: Text(
+                      'en',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
                   DropdownMenuItem(
                       value: 'hy',
                       child: Text('hy', style: TextStyle(color: Colors.black)))
                 ],
-                onChanged: (String? newValue)  {
+                onChanged: (String? newValue) {
                   setState(() {
                     language = newValue!;
                     _locale = newValue!;
@@ -232,12 +233,13 @@ class NumberAndPasswordState extends State<NumberAndPassword> {
                         ? () {
                             if ((phone == '123456789') &&
                                 (password == 'mariam123')) {
-                              Navigator.pushReplacementNamed(context, '/request_list');
+                              Navigator.pushReplacementNamed(
+                                  context, '/request_list');
                             } else {
                               if (phone.length > 20 || password.length > 20) {
-                                warningAlertDialog();
+                                warningAlertDialog(context);
                               } else {
-                                incorrectInputData();
+                                incorrectInputData(context);
                               }
                             }
                           }
@@ -297,7 +299,7 @@ class NumberAndPasswordState extends State<NumberAndPassword> {
     }
   }
 
-  void warningAlertDialog() {
+  void warningAlertDialog(BuildContext context) {
     showDialog(
         context: context,
         builder: (context) {
@@ -308,29 +310,29 @@ class NumberAndPasswordState extends State<NumberAndPassword> {
                 width: 48,
                 height: 48,
               ),
-              const Text(
+              Text(
                 textAlign: TextAlign.center,
-                'Ուշադրություն',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                S.of(context).warning,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ]),
-            content: const SizedBox(
+            content: SizedBox(
               width: 238,
               height: 49,
               child: Text(
-                'Ձեր տվյալները մուտք են արվել թույլատրելի քանակից շատ։',
-                style: TextStyle(fontSize: 14),
+                S.of(context).input_data_wrong,
+                style: const TextStyle(fontSize: 14),
                 textAlign: TextAlign.center,
               ),
             ),
-            actions: const [
+            actions: [
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 TextButton(
                   onPressed: null,
                   child: Text(
-                    'Վերականգնել գաղտնաբառը',
+                    S.of(context).reset_password,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: AppColors.appBar, fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -340,33 +342,35 @@ class NumberAndPasswordState extends State<NumberAndPassword> {
         });
   }
 
-  void incorrectInputData() {
+  void incorrectInputData(BuildContext context) {
     showDialog(
         context: context,
         builder: (context) {
-          return const AlertDialog(
+          return AlertDialog(
             title: Text(
               textAlign: TextAlign.center,
-              'Սխալ մուտքային տվյալներ',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              S.of(context).invalid_input_data,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             content: SizedBox(
               width: 238,
               height: 49,
               child: Text(
-                'Մուտքային տվյալները սխալ են լրացված',
-                style: TextStyle(fontSize: 14),
+                S.of(context).the_input_data_was_filled_in_incorrectly,
+                style: const TextStyle(fontSize: 14),
                 textAlign: TextAlign.center,
               ),
             ),
             actions: [
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 TextButton(
-                  onPressed: null,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   child: Text(
-                    'Փորձել կրկին',
+                    S.of(context).try_again,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: AppColors.appBar, fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -377,8 +381,3 @@ class NumberAndPasswordState extends State<NumberAndPassword> {
   }
 }
 
-// class LanguageProvider extends ChangeNotifier {
-//   void changeLanguage(String lang) {
-//     language = lang;
-//   }
-// }

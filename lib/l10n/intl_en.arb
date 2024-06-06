@@ -13,5 +13,11 @@
   "enter_password": "Enter password",
   "have_not_registered": "You haven't registered yet?",
   "register": "Register",
-  "minimum_character": "Minimum 8 characters"
+  "minimum_character": "Minimum 8 characters",
+  "warning": "Warning",
+  "input_data_wrong": "Your data has been accessed more than the allowed amount.",
+  "reset_password": "Reset password",
+  "invalid_input_data": "Invalid input data",
+  "the_input_data_was_filled_in_incorrectly": "The input data was filled in incorrectly",
+  "try_again": "Try again"
 }

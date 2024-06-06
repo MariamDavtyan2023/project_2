@@ -9,7 +9,6 @@ import 'package:project_2/widgets/list_view_request.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
-
 class Requests extends StatefulWidget {
   const Requests({super.key});
 
@@ -57,53 +56,76 @@ class RequestsState extends State<Requests> {
         GlobalCupertinoLocalizations.delegate
       ],
       supportedLocales: [Locale(_locale)],
+      routes: { '/login_screen': (context) => const NumberAndPassword()},
       home: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
             backgroundColor: AppColors.appBar,
-            centerTitle: true,
             shape: const OutlineInputBorder(
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(18),
                   bottomRight: Radius.circular(18)),
             ),
             toolbarHeight: 142,
-            leading: const Icon(
-              Icons.keyboard_arrow_left,
-              color: AppColors.appBarText,
-              size: 32,
-            ),
             title: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  S.of(context).requests,
-                  style: const TextStyle(
-                      fontSize: 18,
-                      color: AppColors.appBarText,
-                      fontWeight: FontWeight.bold),
-                ),
-                TextField(
-                  cursorColor: AppColors.appBarText,
-                  decoration: InputDecoration(
-                    hintText: S.of(context).search,
-                    fillColor: AppColors.textFieldAppBar,
-                    filled: true,
-                    prefixIcon: const Icon(
-                      Icons.search,
-                      color: AppColors.appBarText,
-                    ),
-                    border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(right: 100),
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.keyboard_arrow_left,
+                          color: AppColors.appBarText,
+                          size: 32,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            Navigator.pushReplacementNamed(context, '/login_screen');
+                          });
+
+                        },
                       ),
                     ),
+                    Text(
+                      S.of(context).requests,
+                      style: const TextStyle(
+                          fontSize: 18,
+                          color: AppColors.appBarText,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  width: 344,
+                  height: 36,
+                  child: TextField(
+                    cursorColor: AppColors.appBarText,
+                    decoration: InputDecoration(
+                      hintText: S.of(context).search,
+                      hintStyle: const TextStyle(
+                          fontSize: 16, color: AppColors.appBarText),
+                      fillColor: AppColors.textFieldAppBar,
+                      filled: true,
+                      prefixIcon: const Icon(
+                        Icons.search,
+                        color: AppColors.appBarText,
+                      ),
+                      border: const OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.all(
+                          Radius.elliptical(15, 15),
+                        ),
+                      ),
+                    ),
+                    onChanged: (val) {
+                      setState(() {
+                        name = val;
+                      });
+                    },
                   ),
-                  onChanged: (val) {
-                    setState(() {
-                      name = val;
-                    });
-                  },
                 ),
               ],
             ),

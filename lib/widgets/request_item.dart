@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_2/generated/l10n.dart';
 import 'package:project_2/requests/models/request.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:project_2/res/colors.dart';
 
 class RequestItem extends StatelessWidget {
   Request request;

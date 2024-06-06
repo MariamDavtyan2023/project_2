@@ -13,5 +13,11 @@
   "enter_password": "Լրացնել գաղտնաբառը",
   "have_not_registered": "Դուք դեռ չե՞ք գրանցվել։",
   "register": "Գրանցվել",
-  "minimum_character": "Նվազագույնը 8 նիշ"
+  "minimum_character": "Նվազագույնը 8 նիշ",
+  "warning": "Ուշադրություն",
+  "input_data_wrong": "Ձեր տվյալները մուտք են արվել թույլատրելի քանակից շատ։",
+  "reset_password": "Վերականգնել գաղտնաբառը",
+  "invalid_input_data": "Սխալ մուտքային տվյալներ",
+  "the_input_data_was_filled_in_incorrectly": "Մուտքային տվյալները սխալ են լրացված",
+  "try_again": "Փորձել կրկին"
 }
