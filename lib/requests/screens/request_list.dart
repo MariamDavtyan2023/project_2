@@ -10,242 +10,142 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 
+class Requests extends StatefulWidget {
+  const Requests({super.key});
 
-class Requests extends StatelessWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return RequestsState();
+  }
+}
 
-   const Requests({super.key});
+class RequestsState extends State<Requests> {
+  String name = '';
+  String _locale = language;
+  List<Request> requests = [];
+
+  Future<List<Request>> loadRequests({String locale = "armenian"}) async {
+    final String response = await rootBundle.loadString(
+        'assets/local/${locale == 'hy' ? 'armenian.json' : 'english.json'}');
+    final List<dynamic> data = jsonDecode(response);
+    return data.map((json) => Request.fromJson(json)).toList();
+  }
+
+  @override
+  void initState() {
+    initValues(locale: language);
+    _locale = language;
+    super.initState();
+  }
+
+  Future<void> initValues({String locale = 'hy'}) async {
+    requests = await loadRequests(locale: locale);
+    setState(() {
+      _locale = locale;
+      language = locale;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      locale: Locale(language),
       localizationsDelegates: const <LocalizationsDelegate>[
         S.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate
       ],
-      supportedLocales: [Locale(language)],
-      home: const SearchRequest(),
-    );
-  }
-
-}
-
-class SearchRequest extends StatefulWidget {
-
-  const SearchRequest({super.key});
-
-  @override
-  State<StatefulWidget> createState() {
-    return SearchRequestState();
-  }
-}
-
-class SearchRequestState extends State<SearchRequest> {
-
-  String name = '';
-
-  //  List<Request> requests = [
-  //   Request(
-  //       bankImage: 'assets/images/evokabank.png',
-  //       bankName: 'Էվոկա բանկ',
-  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
-  //       purpose: 'Նոր վարկի դիմում',
-  //       date: DateTime.now(),
-  //       effect: 'Ազդում է',
-  //       effectIcon: 'assets/icons/low_price.png'),
-  //   Request(
-  //       bankImage: 'assets/images/id_bank.png',
-  //       bankName: 'Այ Դի բանկ',
-  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
-  //       purpose: 'Նոր վարկի դիմում',
-  //       date: DateTime.now(),
-  //       effect: 'Չի ազդում',
-  //       effectIcon: 'assets/icons/hand.png'),
-  //   Request(
-  //       bankImage: 'assets/images/default_logo.png',
-  //       bankName: 'Բանկային կազմակերպություն',
-  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
-  //       purpose: 'Նոր վարկի դիմում',
-  //       date: DateTime.now(),
-  //       effect: 'Ազդում է',
-  //       effectIcon: 'assets/icons/low_price.png'),
-  //   Request(
-  //       bankImage: 'assets/images/evokabank.png',
-  //       bankName: 'Էվոկա բանկ',
-  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
-  //       purpose: 'Նոր վարկի դիմում',
-  //       date: DateTime.now(),
-  //       effect: 'Ազդում է',
-  //       effectIcon: 'assets/icons/low_price.png'),
-  //   Request(
-  //       bankImage: 'assets/images/id_bank.png',
-  //       bankName: 'Այ Դի բանկ',
-  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
-  //       purpose: 'Նոր վարկի դիմում',
-  //       date: DateTime.now(),
-  //       effect: 'Չի ազդում',
-  //       effectIcon: 'assets/icons/hand.png'),
-  //   Request(
-  //       bankImage: 'assets/images/default_logo.png',
-  //       bankName: 'Բանկային կազմակերպություն',
-  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
-  //       purpose: 'Նոր վարկի դիմում',
-  //       date: DateTime.now(),
-  //       effect: 'Ազդում է',
-  //       effectIcon: 'assets/icons/low_price.png'),
-  //   Request(
-  //       bankImage: 'assets/images/evokabank.png',
-  //       bankName: 'Էվոկա բանկ',
-  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
-  //       purpose: 'Նոր վարկի դիմում',
-  //       date: DateTime.now(),
-  //       effect: 'Ազդում է',
-  //       effectIcon: 'assets/icons/low_price.png'),
-  //   Request(
-  //       bankImage: 'assets/images/id_bank.png',
-  //       bankName: 'Այ Դի բանկ',
-  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
-  //       purpose: 'Նոր վարկի դիմում',
-  //       date: DateTime.now(),
-  //       effect: 'Չի ազդում',
-  //       effectIcon: 'assets/icons/hand.png'),
-  //   Request(
-  //       bankImage: 'assets/images/default_logo.png',
-  //       bankName: 'Բանկային կազմակերպություն',
-  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
-  //       purpose: 'Նոր վարկի դիմում',
-  //       date: DateTime.now(),
-  //       effect: 'Ազդում է',
-  //       effectIcon: 'assets/icons/low_price.png'),
-  //   Request(
-  //       bankImage: 'assets/images/evokabank.png',
-  //       bankName: 'Էվոկա բանկ',
-  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
-  //       purpose: 'Նոր վարկի դիմում',
-  //       date: DateTime.now(),
-  //       effect: 'Ազդում է',
-  //       effectIcon: 'assets/icons/low_price.png'),
-  //   Request(
-  //       bankImage: 'assets/images/id_bank.png',
-  //       bankName: 'Այ Դի բանկ',
-  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
-  //       purpose: 'Նոր վարկի դիմում',
-  //       date: DateTime.now(),
-  //       effect: 'Չի ազդում',
-  //       effectIcon: 'assets/icons/hand.png'),
-  //   Request(
-  //       bankImage: 'assets/images/default_logo.png',
-  //       bankName: 'Բանկային կազմակերպություն',
-  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
-  //       purpose: 'Նոր վարկի դիմում',
-  //       date: DateTime.now(),
-  //       effect: 'Ազդում է',
-  //       effectIcon: 'assets/icons/low_price.png'),
-  //   Request(
-  //       bankImage: 'assets/images/evokabank.png',
-  //       bankName: 'Էվոկա բանկ',
-  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
-  //       purpose: 'Նոր վարկի դիմում',
-  //       date: DateTime.now(),
-  //       effect: 'Ազդում է',
-  //       effectIcon: 'assets/icons/low_price.png'),
-  //   Request(
-  //       bankImage: 'assets/images/id_bank.png',
-  //       bankName: 'Այ Դի բանկ',
-  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
-  //       purpose: 'Նոր վարկի դիմում',
-  //       date: DateTime.now(),
-  //       effect: 'Չի ազդում',
-  //       effectIcon: 'assets/icons/hand.png'),
-  //   Request(
-  //       bankImage: 'assets/images/default_logo.png',
-  //       bankName: 'Բանկային կազմակերպություն',
-  //       type: 'ՖԱՅԿՈ Սքոր զեկույց',
-  //       purpose: 'Նոր վարկի դիմում',
-  //       date: DateTime.now(),
-  //       effect: 'Ազդում է',
-  //       effectIcon: 'assets/icons/low_price.png'),
-  // ];
-
-
-  List<Request> requests=[];
-
-  Future<List<Request>> loadRequests({ String locale="armenian"}) async {
-    final String response = await rootBundle.loadString('assets/local/${locale == "am" ? 'armenian.json' : 'english.json'}');
-    final List<dynamic> data = jsonDecode(response);
-    return data.map((json) => Request.fromJson(json)).toList();
-  }
-  @override
-  void initState() {
-    initValues(locale: "am");
-    super.initState();
-  }
-
-  Future<void> initValues({String locale = "am"}) async{
-    requests =await loadRequests(locale: locale);
-    setState(() {});
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        shape: const OutlineInputBorder(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(18),
-                bottomRight: Radius.circular(18))),
-        toolbarHeight: 142,
-        leading: const Icon(
-          Icons.keyboard_arrow_left,
-          color: AppColors.appBarText,
-          size: 32,
-        ),
-        title:  Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-             Text(
-              S.of(context).requests,
-              style: const TextStyle(
-                  fontSize: 18,
-                  color: AppColors.appBarText,
-                  fontWeight: FontWeight.bold),
+      supportedLocales: [Locale(_locale)],
+      home: Builder(
+        builder: (BuildContext context) => Scaffold(
+          appBar: AppBar(
+            backgroundColor: AppColors.appBar,
+            centerTitle: true,
+            shape: const OutlineInputBorder(
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(18),
+                  bottomRight: Radius.circular(18)),
             ),
-            TextField(
-              cursorColor: AppColors.appBarText,
-              decoration:  InputDecoration(
-                hintText: S.of(context).search,
-                fillColor: AppColors.textFieldAppBar,
-                filled: true,
-                prefixIcon: const Icon(Icons.search, color: AppColors.appBarText,),
-                border: const OutlineInputBorder(
-                  borderRadius:  BorderRadius.all(
-                    Radius.circular(15),
-                  ),
+            toolbarHeight: 142,
+            leading: const Icon(
+              Icons.keyboard_arrow_left,
+              color: AppColors.appBarText,
+              size: 32,
+            ),
+            title: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  S.of(context).requests,
+                  style: const TextStyle(
+                      fontSize: 18,
+                      color: AppColors.appBarText,
+                      fontWeight: FontWeight.bold),
                 ),
-              ),
-              onChanged: (val){
-                setState(() {
-                  name = val;
-                });
-              },
+                TextField(
+                  cursorColor: AppColors.appBarText,
+                  decoration: InputDecoration(
+                    hintText: S.of(context).search,
+                    fillColor: AppColors.textFieldAppBar,
+                    filled: true,
+                    prefixIcon: const Icon(
+                      Icons.search,
+                      color: AppColors.appBarText,
+                    ),
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15),
+                      ),
+                    ),
+                  ),
+                  onChanged: (val) {
+                    setState(() {
+                      name = val;
+                    });
+                  },
+                ),
+              ],
             ),
-          ],
+            actions: [
+              DropdownButton<String>(
+                value: language,
+                icon: const Icon(
+                  Icons.language,
+                  color: AppColors.appBarText,
+                ),
+                style: const TextStyle(color: AppColors.appBarText),
+                items: const [
+                  DropdownMenuItem(
+                    value: 'en',
+                    child: Text(
+                      'en',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                  DropdownMenuItem(
+                      value: 'hy',
+                      child: Text('hy', style: TextStyle(color: Colors.black)))
+                ],
+                onChanged: (String? newValue) async {
+                  await initValues(locale: newValue!);
+                },
+              ),
+            ],
+          ),
+          body: ListViewRequest(search(name)),
         ),
-        backgroundColor: AppColors.appBar,
-        centerTitle: true,
       ),
-      body: ListViewRequest(search(name)),
     );
   }
 
   List<Request> search(String name) {
-    if(name.isEmpty) {
+    if (name.isEmpty) {
       return requests;
     }
     List<Request> list = [];
-    for(var request in requests) {
-      if(request.bankName.toLowerCase().contains(name.toLowerCase())) {
+    for (var request in requests) {
+      if (request.bankName.toLowerCase().contains(name.toLowerCase())) {
         list.add(request);
       }
     }
