@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:project_2/net/network.dart';
 import 'package:project_2/res/colors.dart';
 import '../../generated/l10n.dart';
 import '../../requests/screens/request_list.dart';
@@ -230,11 +232,10 @@ class NumberAndPasswordState extends State<NumberAndPassword> {
                   ),
                   ElevatedButton(
                     onPressed: _validPhoneAndPassword
-                        ? () {
-                            if ((phone == '123456789') &&
-                                (password == 'mariam123')) {
-                              Navigator.pushReplacementNamed(
-                                  context, '/request_list');
+                        ? () async {
+                            if ((phone == "37495555589") &&
+                                (password == "Aa123456@")) {
+                              login(context);
                             } else {
                               if (phone.length > 20 || password.length > 20) {
                                 warningAlertDialog(context);
@@ -313,7 +314,8 @@ class NumberAndPasswordState extends State<NumberAndPassword> {
               Text(
                 textAlign: TextAlign.center,
                 S.of(context).warning,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ]),
             content: SizedBox(
@@ -379,5 +381,11 @@ class NumberAndPasswordState extends State<NumberAndPassword> {
           );
         });
   }
-}
 
+ Future<void> login(BuildContext context) async {
+    Network net = Network();
+    await net.identification(phone, password, context);
+
+
+  }
+}
